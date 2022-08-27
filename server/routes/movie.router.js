@@ -13,7 +13,6 @@ router.get('/:id', (req, res) => {
       console.log('ERROR: Get detail movies', err);
       res.sendStatus(500)
     })
-
 });
 
 router.get('/', (req, res) => {
