@@ -8,6 +8,8 @@ function AddMovie() {
     const history = useHistory()
     const dispatch = useDispatch()
 
+    let [hidden, setHidden] = useState(true)
+
     const [movieData, setMovieData] = useState({ title: '', poster: '', description: '', genre_id: '' })
 
     const [genre_id, setGenre_id] = useState('')
@@ -15,6 +17,7 @@ function AddMovie() {
     const demoPoster = (id, genre) => {
         setMovieData({ ...movieData, genre_id: id })
         setGenre_id(genre)
+        setHidden(!hidden)
     }
 
     const handleSubmit = () => {
@@ -54,19 +57,21 @@ function AddMovie() {
                 <button onClick={() => history.push('/')}>Cancel</button>
                 <button onClick={() => handleSubmit()}>Save</button>
             </div>
-            <div>
-            <div className="card">
+            {!hidden &&
                 <div>
-                    <div className="card-title">{movieData.title}</div>
-                    <img className="card-img-top" src={movieData.poster} />
-                    <div className="card-body">{movieData.description}</div>
+                    <div className="card">
+                        <div>
+                            <div className="card-title">{movieData.title}</div>
+                            <img className="card-img-top" src={movieData.poster} />
+                            <div className="card-body">{movieData.description}</div>
+                        </div>
+                        <div>
+                            <h5>Movie Genres:</h5>
+                            <div className="card-text">{genre_id}</div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h5>Movie Genres:</h5>
-                    <div className="card-text">{genre_id}</div>
-                </div>
-            </div>
-            </div>
+            }
         </>
     )
 }
