@@ -1,9 +1,24 @@
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from "react-router-dom";
 import './Details.css'
 
 function Details() {
 
+    useEffect(() => {
+        reload(id)
+    }, [])
+    let {id} = useParams()
+    
+    const reload = (id) => {
+        console.log(id)
+        dispatch({
+            type: 'GET_DETAILS',
+            payload : id
+        })
+    }
+
+    const dispatch = useDispatch()
     const history = useHistory();
 
     const details = useSelector(store => store.details);
@@ -14,14 +29,14 @@ function Details() {
         <>
         <div className="card">
             {details.map(detail => (
-                <div>
+                <div key={detail.title}>
                     <div className="card-title">{detail.title}</div>
                     <img className="card-img-top" src={detail.poster} />
                     <div className="card-body">{detail.description}</div>
                 </div>
             ))}
             {genres.map(genre => (
-                <div>
+                <div key={genre.name}>
                     <h5>Movie Genres:</h5>
                     <div className="card-text">{genre.name}</div>
                 </div>

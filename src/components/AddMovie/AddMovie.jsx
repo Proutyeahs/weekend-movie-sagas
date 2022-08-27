@@ -10,6 +10,13 @@ function AddMovie() {
 
     const [movieData, setMovieData] = useState({ title: '', poster: '', description: '', genre_id: '' })
 
+    const [genre_id, setGenre_id] = useState('')
+
+    const demoPoster = (id, genre) => {
+        setMovieData({ ...movieData, genre_id: id })
+        setGenre_id(genre)
+    }
+
     const handleSubmit = () => {
         console.log(movieData)
         dispatch({
@@ -28,24 +35,37 @@ function AddMovie() {
             <div className="dropdown">
                 <button >Movie Genres</button>
                 <div className="dropdown-content">
-                    <a onClick={() => setMovieData({ ...movieData, genre_id: 1 })} >Adventure</a>
-                    <a onClick={() => setMovieData({ ...movieData, genre_id: 2 })} >Animated</a>
-                    <a onClick={() => setMovieData({ ...movieData, genre_id: 3 })} >Biographical</a>
-                    <a onClick={() => setMovieData({ ...movieData, genre_id: 4 })} >Comedy</a>
-                    <a onClick={() => setMovieData({ ...movieData, genre_id: 5 })} >Disaster</a>
-                    <a onClick={() => setMovieData({ ...movieData, genre_id: 6 })} >Drama</a>
-                    <a onClick={() => setMovieData({ ...movieData, genre_id: 7 })} >Epic</a>
-                    <a onClick={() => setMovieData({ ...movieData, genre_id: 8 })} >Fantasy</a>
-                    <a onClick={() => setMovieData({ ...movieData, genre_id: 9 })} >Musical</a>
-                    <a onClick={() => setMovieData({ ...movieData, genre_id: 10 })} >Romantic</a>
-                    <a onClick={() => setMovieData({ ...movieData, genre_id: 11 })} >Science Fiction</a>
-                    <a onClick={() => setMovieData({ ...movieData, genre_id: 12 })} >Space-Opera</a>
-                    <a onClick={() => setMovieData({ ...movieData, genre_id: 13 })} >Superhero</a>
+                    <a onClick={() => demoPoster(1, 'Adventure')} >Adventure</a>
+                    <a onClick={() => demoPoster(2, 'Animated')} >Animated</a>
+                    <a onClick={() => demoPoster(3, 'Biographical')} >Biographical</a>
+                    <a onClick={() => demoPoster(4, 'Comedy')} >Comedy</a>
+                    <a onClick={() => demoPoster(5, 'Disaster')} >Disaster</a>
+                    <a onClick={() => demoPoster(6, 'Drama')} >Drama</a>
+                    <a onClick={() => demoPoster(7, 'Epic')} >Epic</a>
+                    <a onClick={() => demoPoster(8, 'Fantasy')} >Fantasy</a>
+                    <a onClick={() => demoPoster(9, 'Musical')} >Musical</a>
+                    <a onClick={() => demoPoster(10, 'Romantic')} >Romantic</a>
+                    <a onClick={() => demoPoster(11, 'Science')} >Science Fiction</a>
+                    <a onClick={() => demoPoster(12, 'Space')} >Space-Opera</a>
+                    <a onClick={() => demoPoster(13, 'Superhero')} >Superhero</a>
                 </div>
             </div>
             <div>
                 <button onClick={() => history.push('/')}>Cancel</button>
                 <button onClick={() => handleSubmit()}>Save</button>
+            </div>
+            <div>
+            <div className="card">
+                <div>
+                    <div className="card-title">{movieData.title}</div>
+                    <img className="card-img-top" src={movieData.poster} />
+                    <div className="card-body">{movieData.description}</div>
+                </div>
+                <div>
+                    <h5>Movie Genres:</h5>
+                    <div className="card-text">{genre_id}</div>
+                </div>
+            </div>
             </div>
         </>
     )

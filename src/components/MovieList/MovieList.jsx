@@ -19,7 +19,7 @@ function MovieList() {
             type : 'GET_DETAILS',
             payload: id
         })
-        history.push('/details')
+        history.push(`/details/${id}`)
     }
 
     return (
