@@ -10,12 +10,14 @@ import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
+import { yellow } from '@material-ui/core/colors';
 
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('GET_DETAILS', getDetails);
     yield takeEvery('GET_DETAILS', getGenres);
+    yield takeEvery('ADD_MOVIE', addMovie);
 }
 
 function* fetchAllMovies() {
@@ -29,6 +31,16 @@ function* fetchAllMovies() {
         console.log('get all error');
     }
         
+}
+
+function* addMovie(action) {
+    console.log(action.payload)
+    try{
+        yield axios.post(`/api/movie`, action.payload)
+        yield put({type: 'FETCH_MOVIES'})
+    } catch {
+        console.log('add movie error');
+    }
 }
 
 function* getDetails(action) {

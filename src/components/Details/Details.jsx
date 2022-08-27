@@ -26,7 +26,7 @@ function Details() {
                     <div className="card-text">{genre.name}</div>
                 </div>
             ))}
-            <button className="btn btn-info" onClick={() => history.push('/')}>Back</button>
+            <button onClick={() => history.push('/')}>Back</button>
             </div>
         </>
     )
