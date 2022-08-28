@@ -2,9 +2,21 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
 
+// gets all the genres and movie ids from the DB
 router.get('/', (req, res) => {
+  console.log(req.body)
+  const queryText =`
+    SELECT "movies_genres".movie_id, "genres".name FROM "movies_genres"
+    JOIN "genres"
+    ON "movies_genres".genre_id = "genres".id;`
+    pool.query(queryText).then(result => {
+      res.send(result.rows)
+    }).catch(err => {
+      console.log('err in get genres', err)
+      res.sendStatus(500)
+    })
   // Add query to get all genres
-  res.sendStatus(500)
+  //res.sendStatus(500)
 });
 
 // gets a specific movies genres
