@@ -6,7 +6,7 @@ router.get('/:id', (req, res) => {
   console.log(req.params.id)
   const query = `SELECT * FROM movies WHERE id = $1;`;
   pool.query(query, [req.params.id])
-    .then( result => {
+    .then(result => {
       res.send(result.rows);
     })
     .catch(err => {
@@ -18,7 +18,7 @@ router.get('/:id', (req, res) => {
 router.get('/', (req, res) => {
   const query = `SELECT * FROM movies ORDER BY "title" ASC`;
   pool.query(query)
-    .then( result => {
+    .then(result => {
       res.send(result.rows);
     })
     .catch(err => {
@@ -27,6 +27,24 @@ router.get('/', (req, res) => {
     })
 
 });
+
+router.put('/:id', (req, res) => {
+  console.log("hi", req.body.title)
+  const id = req.params.id
+  const title = req.body.title
+  const description = req.body.description
+  const queryText = `
+    UPDATE "movies"
+    SET "title" = $2, "description" = $3
+    WHERE "id" = $1;`;
+  pool.query(queryText, [id, title, description])
+    .then(results => {
+      res.sendStatus(200)
+    }).catch(err => {
+      console.log(err)
+      res.sendStatus(500)
+    })
+})
 
 router.post('/', (req, res) => {
   console.log(req.body);
@@ -38,13 +56,13 @@ router.post('/', (req, res) => {
 
   // FIRST QUERY MAKES MOVIE
   pool.query(insertMovieQuery, [req.body.title, req.body.poster, req.body.description])
-  .then(result => {
-    console.log('New Movie Id:', result.rows[0].id); //ID IS HERE!
-    
-    const createdMovieId = result.rows[0].id
+    .then(result => {
+      console.log('New Movie Id:', result.rows[0].id); //ID IS HERE!
 
-    // Now handle the genre reference
-    const insertMovieGenreQuery = `
+      const createdMovieId = result.rows[0].id
+
+      // Now handle the genre reference
+      const insertMovieGenreQuery = `
       INSERT INTO "movies_genres" ("movie_id", "genre_id")
       VALUES  ($1, $2);
       `
@@ -58,11 +76,11 @@ router.post('/', (req, res) => {
         res.sendStatus(500)
       })
 
-// Catch for first query
-  }).catch(err => {
-    console.log(err);
-    res.sendStatus(500)
-  })
+      // Catch for first query
+    }).catch(err => {
+      console.log(err);
+      res.sendStatus(500)
+    })
 })
 
 module.exports = router;
