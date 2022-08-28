@@ -24,14 +24,13 @@ function EditGenre() {
 
     const [newGenre, setNewGenre] = useState({id: id, name : ''})
 
+    // sends the delete genre id to the delete route
     const remove = (name) => {
-        console.log(genres.genre_id)
         console.log(name)
         setNewGenre(newGenre.name = name )
         console.log(newGenre)
         dispatch({type: 'DELETE_GENRE', payload: newGenre})
     }
-
 
     return (
         <>
@@ -46,6 +45,7 @@ function EditGenre() {
             <div className="dropdown">
                 <button>Movie Genres</button>
                 <div className="dropdown-content">
+                    {/* sends the id of the genre to the post genre route */}
                     <a onClick={() => dispatch({type: 'ADD_GENRE', payload: 1})} >Adventure</a>
                     <a onClick={() => dispatch({type: 'ADD_GENRE', payload: 2})} >Animated</a>
                     <a onClick={() => dispatch({type: 'ADD_GENRE', payload: 3})} >Biographical</a>

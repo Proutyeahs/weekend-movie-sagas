@@ -114,6 +114,7 @@ function* getGenres(action) {
     }
 }
 
+// sends a request to get all the genres from the database
 function* getAllGenres(action) {
     console.log(action.payload)
     try{
