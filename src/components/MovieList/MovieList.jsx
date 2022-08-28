@@ -25,12 +25,13 @@ function MovieList() {
         history.push(`/details/${id}`)
     }
 
-    // renders the specifc genres on the dom
+    //renders the specifc genres on the dom
     const displayGenres = (id) => {
+        let num = 0
         let movieGenres = []
         for(let genre of allGenres) {
             if (id == genre.movie_id) {
-                movieGenres.push(<p>{genre.name}</p>)
+                movieGenres.push(<p key={num++}>{genre.name}</p>)
             }
         }
         return movieGenres

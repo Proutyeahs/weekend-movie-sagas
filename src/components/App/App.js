@@ -4,6 +4,7 @@ import MovieList from '../MovieList/MovieList'
 import Details from '../Details/Details';
 import AddMovie from '../AddMovie/AddMovie';
 import EditMovie from '../EditMovie/EditMovie';
+import EditGenre from '../EditGenre/EditGenre';
 
 function App() {
   return (
@@ -24,6 +25,10 @@ function App() {
 
         <Route path="/editmovie/:id">
           <EditMovie />
+        </Route>
+
+        <Route path="/editgenre/:id">
+          <EditGenre />
         </Route>
       </Router>
     </div>

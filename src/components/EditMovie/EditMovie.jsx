@@ -25,7 +25,7 @@ function EditMovie() {
     const details = useSelector(store => store.details);
     // const genres = useSelector(store => store.genres);
 
-    const [movieData, setMovieData] = useState({title: ''/*, poster: ''*/, description: '', genre_id: '',  id: id })
+    const [movieData, setMovieData] = useState({ title: ''/*, poster: ''*/, description: '', genre_id: '', id: id })
     const [genre_id, setGenre_id] = useState('')
 
     // dispalys the updated values before saving it to the DB
@@ -39,11 +39,14 @@ function EditMovie() {
 
     // sends updated movie values to the put request
     const update = () => {
+        if (movieData.title == '' || movieData.description == '') {
+            return alert('Please make sure all input values are filled out')
+        }
         dispatch({
             type: 'UPDATE',
             payload: movieData
         })
-        setTimeout(() => {history.push(`/details/${id}`)}, 2000)
+        setTimeout(() => { history.push(`/details/${id}`) }, 1000)
     }
 
     // sends the id to the delete request

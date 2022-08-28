@@ -9,17 +9,17 @@ function Details() {
     useEffect(() => {
         reload(id)
     }, [])
-    let {id} = useParams()
-    
+    let { id } = useParams()
+
     const reload = (id) => {
         console.log(id)
         dispatch({
-            type: 'GET_DETAILS', 
-            payload : id
+            type: 'GET_DETAILS',
+            payload: id
         })
         dispatch({
             type: 'GET_GENRES',
-            payload : id
+            payload: id
         })
     }
 
@@ -32,22 +32,25 @@ function Details() {
     console.log(details, genres)
     return (
         <>
-        <div className="card">
-            {details.map(detail => (
-                <div key={detail.title}>
-                    <div className="card-title">{detail.title}</div>
-                    <img className="card-img-top" src={detail.poster} />
-                    <div className="card-body">{detail.description}</div>
+            <div className="card">
+                {details.map(detail => (
+                    <div key={detail.title}>
+                        <div className="card-title">{detail.title}</div>
+                        <img className="card-img-top" src={detail.poster} />
+                        <div className="card-body">{detail.description}</div>
+                    </div>
+                ))}
+                <h5>Movie Genres:</h5>
+                {genres.map(genre => (
+                    <div key={genre.name}>
+                        <div className="card-text">{genre.name}</div>
+                    </div>
+                ))}
+                <div>
+                    <button className="hover" onClick={() => history.push(`/editgenre/${id}`)}>Add/Remove Genre</button>
                 </div>
-            ))}
-            <h5>Movie Genres:</h5>
-            {genres.map(genre => (
-                <div key={genre.name}>
-                    <div className="card-text">{genre.name}</div>
-                </div>
-            ))}
-            <button className="hover" onClick={() => history.push(`/editmovie/${id}`)}>Edit Movie</button>
-            <button className="hover" onClick={() => history.push('/')}>Back</button>
+                <button className="hover" onClick={() => history.push(`/editmovie/${id}`)}>Edit Movie</button>
+                <button className="hover" onClick={() => history.push('/')}>Back</button>
             </div>
         </>
     )
