@@ -52,6 +52,25 @@ router.put('/:id', (req, res) => {
     })
 })
 
+router.delete('/:id', (req, res) => {
+  console.log(req.params.id)
+  const id = req.params.id
+  queryText = `
+    DELETE FROM "movies_genres"
+    WHERE "movie_id" = $1;`;
+  queryText2 = `
+    DELETE FROM "movies"
+    WHERE "id" = $1;`;
+  pool.query(queryText, [id])
+  pool.query(queryText2, [id])
+  .then(results => {
+    res.sendStatus(200)
+  }).catch(err => {
+    console.log(err)
+    res.sendStatus(500)
+  })
+})
+
 router.post('/', (req, res) => {
   console.log(req.body);
   // RETURNING "id" will give us back the id of the created movie

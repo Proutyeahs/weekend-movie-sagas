@@ -43,9 +43,22 @@ function EditMovie() {
         history.push(`/details/${id}`)
     }
 
+    const remove = () => {
+        console.log(id)
+        dispatch({
+            type: 'DELETE',
+            payload: id
+        })
+        history.push('/')
+    }
+
     return (
         <>
             <div>
+                <div>
+                    <button onClick={() => remove()} className="hover">Delete Entire Entry</button>
+                </div>
+                <p>or</p>
                 <h3>Edit Movie:</h3>
                 <input className="card-title" placeholder={'title'} value={movieData.title} onChange={(event) => setMovieData({ ...movieData, title: event.target.value })} />
                 <input className="card-body" placeholder={'description'} value={movieData.description} onChange={(event) => setMovieData({ ...movieData, description: event.target.value })} />
@@ -82,8 +95,8 @@ function EditMovie() {
                         </div>
                     ))}
                     <div className="card-body">{movieData.description}</div>
-                            <h5>Movie Genres:</h5>
-                            <div className="card-text">{genre_id}</div>
+                    <h5>Movie Genres:</h5>
+                    <div className="card-text">{genre_id}</div>
                 </div>
             }
         </>
