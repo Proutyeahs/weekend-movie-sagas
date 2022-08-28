@@ -41,8 +41,8 @@ function Details() {
                     <div className="card-text">{genre.name}</div>
                 </div>
             ))}
-            <button onClick={() => history.push(`/editmovie/${id}`)}>Edit Movie</button>
-            <button onClick={() => history.push('/')}>Back</button>
+            <button className="hover" onClick={() => history.push(`/editmovie/${id}`)}>Edit Movie</button>
+            <button className="hover" onClick={() => history.push('/')}>Back</button>
             </div>
         </>
     )

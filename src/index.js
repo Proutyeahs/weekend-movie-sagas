@@ -27,18 +27,15 @@ function* fetchAllMovies() {
         const movies = yield axios.get('/api/movie');
         console.log('get all:', movies.data);
         yield put({ type: 'SET_MOVIES', payload: movies.data });
-
     } catch {
         console.log('get all error');
     }
-        
 }
 
 function* updateMovie(action) {
     console.log(action.payload)
     try {
         yield axios.put(`/api/movie/${action.payload.id}`, action.payload)
-        yield put({type: 'FETCH_MOVIES'})
     }
     catch {
         console.log('update movie error');

@@ -24,10 +24,18 @@ function EditMovie() {
     const details = useSelector(store => store.details);
     const genres = useSelector(store => store.genres);
 
-    const [movieData, setMovieData] = useState({id: id, title: ''/*, poster: ''*/, description: ''/*, genre_id: '' */})
+    const [movieData, setMovieData] = useState({ id: id, title: ''/*, poster: ''*/, description: '', genre_id: '' })
+    const [genre_id, setGenre_id] = useState('')
+
+    const editGenre = (id, genre) => {
+        setMovieData({ ...movieData, genre_id: id })
+        setGenre_id(genre)
+        setHidden(!hidden)
+    }
+
+    let [hidden, setHidden] = useState(true)
 
     const update = () => {
-        
         dispatch({
             type: 'UPDATE',
             payload: movieData
@@ -37,43 +45,47 @@ function EditMovie() {
 
     return (
         <>
-            <div className="card">
-                {details.map(detail => (
-                    <div key={detail.title}>
-                        <p>Movie Title:</p>
-                        <input className="card-title" placeholder={detail.title} value={movieData.title} onChange={(event) => setMovieData({ ...movieData, title: event.target.value })}/>
-                        {/* <p>Movie Poster:</p>
-                        <input className="card-img-top" placeholder={detail.poster} value={movieData.poster} onChange={(event) => setMovieData({ ...movieData, poster: event.target.value })}/> */}
-                        <p>Movie Description:</p>
-                        <input className="card-body" placeholder={detail.description} value={movieData.description} onChange={(event) => setMovieData({ ...movieData, description: event.target.value })}/>
+            <div>
+                <h3>Edit Movie:</h3>
+                <input className="card-title" placeholder={'title'} value={movieData.title} onChange={(event) => setMovieData({ ...movieData, title: event.target.value })} />
+                <input className="card-body" placeholder={'description'} value={movieData.description} onChange={(event) => setMovieData({ ...movieData, description: event.target.value })} />
+                <div className="dropdown">
+                    <button >Movie Genres</button>
+                    <div className="dropdown-content">
+                        <a onClick={() => editGenre(1, 'Adventure')} >Adventure</a>
+                        <a onClick={() => editGenre(2, 'Animated')} >Animated</a>
+                        <a onClick={() => editGenre(3, 'Biographical')} >Biographical</a>
+                        <a onClick={() => editGenre(4, 'Comedy')} >Comedy</a>
+                        <a onClick={() => editGenre(5, 'Disaster')} >Disaster</a>
+                        <a onClick={() => editGenre(6, 'Drama')} >Drama</a>
+                        <a onClick={() => editGenre(7, 'Epic')} >Epic</a>
+                        <a onClick={() => editGenre(8, 'Fantasy')} >Fantasy</a>
+                        <a onClick={() => editGenre(9, 'Musical')} >Musical</a>
+                        <a onClick={() => editGenre(10, 'Romantic')} >Romantic</a>
+                        <a onClick={() => editGenre(11, 'Science')} >Science Fiction</a>
+                        <a onClick={() => editGenre(12, 'Space')} >Space-Opera</a>
+                        <a onClick={() => editGenre(13, 'Superhero')} >Superhero</a>
                     </div>
-                ))}
-                {genres.map(genre => (
-                    <div key={genre.name}>
-                        {/* <p>Movie Genres:</p>
-                        <input className="card-text" placeholder={genre.name} value={movieData.genre_id} onChange={(event) => setMovieData({ ...movieData, genre_id: event.target.value })}/> */}
-                    </div>
-                ))}
-                <button onClick={() => history.push('/')}>Cancel</button>
-                <button onClick={() => update()}>Save</button>
+                </div>
+                <div>
+                    <button className="hover" onClick={() => history.push('/')}>Cancel</button>
+                    <button className="hover" onClick={() => update()}>Save</button>
+                </div>
             </div>
 
-            {/* Previous Card */}
-            <div className="card">
-                {details.map(detail => (
-                    <div key={detail.title}>
-                        <div className="card-title">{detail.title}</div>
-                        <img className="card-img-top" src={detail.poster} />
-                        <div className="card-body">{detail.description}</div>
-                    </div>
-                ))}
-                {genres.map(genre => (
-                    <div key={genre.name}>
-                        <h5>Movie Genres:</h5>
-                        <div className="card-text">{genre.name}</div>
-                    </div>
-                ))}
-            </div>
+            {!hidden &&
+                <div className="card">
+                    <div className="card-title">{movieData.title}</div>
+                    {details.map(detail => (
+                        <div key={detail.title}>
+                            <img className="card-img-top" src={detail.poster} />
+                        </div>
+                    ))}
+                    <div className="card-body">{movieData.description}</div>
+                            <h5>Movie Genres:</h5>
+                            <div className="card-text">{genre_id}</div>
+                </div>
+            }
         </>
     )
 }

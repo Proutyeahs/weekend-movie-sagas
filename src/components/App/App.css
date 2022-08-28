@@ -27,3 +27,7 @@ body {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.hover:hover {
+  background-color:  #7a5959;
+}

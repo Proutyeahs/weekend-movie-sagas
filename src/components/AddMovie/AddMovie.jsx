@@ -54,8 +54,8 @@ function AddMovie() {
                 </div>
             </div>
             <div>
-                <button onClick={() => history.push('/')}>Cancel</button>
-                <button onClick={() => handleSubmit()}>Save</button>
+                <button className="hover" onClick={() => history.push('/')}>Cancel</button>
+                <button className="hover" onClick={() => handleSubmit()}>Save</button>
             </div>
             {!hidden &&
                 <div>

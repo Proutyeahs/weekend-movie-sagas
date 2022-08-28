@@ -25,7 +25,7 @@ function MovieList() {
     return (
         <main>
             <h1>MovieList</h1>
-            <button onClick={() => history.push('/AddMovie')}>Add A Movie</button>
+            <button className="hover" onClick={() => history.push('/AddMovie')}>Add A Movie</button>
             <section className="movies">
                 {movies.map(movie => {
                     return (
