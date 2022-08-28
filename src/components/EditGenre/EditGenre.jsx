@@ -22,13 +22,16 @@ function EditGenre() {
 
     const genres = useSelector(store => store.genres);
 
-    const [genre_id, setGenre_id] = useState('')
+    const [newGenre, setNewGenre] = useState({id: id, name : ''})
 
-    // dispalys the updated values before saving it to the DB
-    const addGenre = (id, genre) => {
-        setMovieData({ ...movieData, genre_id: id })
-        setGenre_id(genre)
+    const remove = (name) => {
+        console.log(genres.genre_id)
+        console.log(name)
+        setNewGenre(newGenre.name = name )
+        console.log(newGenre)
+        dispatch({type: 'DELETE_GENRE', payload: newGenre})
     }
+
 
     return (
         <>
@@ -36,26 +39,26 @@ function EditGenre() {
         <h3>Remove Genres:</h3>
         {genres.map(genre => {
             return (
-                <p key={genre.name}>{genre.name} ~ <button onClick={() => dispatch({type: 'DELETE_GENRE', payload: genres})} className="hover">Delete</button></p>
+                <p key={genre.name}>{genre.name} ~ <button value={newGenre.name} onClick={() => remove(genre.name)} className="hover">Delete</button></p>
             )
         })}
         <h3>Add Genres:</h3>
             <div className="dropdown">
                 <button>Movie Genres</button>
                 <div className="dropdown-content">
-                    <a onClick={() => addGenre(1, 'Adventure')} >Adventure</a>
-                    <a onClick={() => addGenre(2, 'Animated')} >Animated</a>
-                    <a onClick={() => addGenre(3, 'Biographical')} >Biographical</a>
-                    <a onClick={() => addGenre(4, 'Comedy')} >Comedy</a>
-                    <a onClick={() => addGenre(5, 'Disaster')} >Disaster</a>
-                    <a onClick={() => addGenre(6, 'Drama')} >Drama</a>
-                    <a onClick={() => addGenre(7, 'Epic')} >Epic</a>
-                    <a onClick={() => addGenre(8, 'Fantasy')} >Fantasy</a>
-                    <a onClick={() => addGenre(9, 'Musical')} >Musical</a>
-                    <a onClick={() => addGenre(10, 'Romantic')} >Romantic</a>
-                    <a onClick={() => addGenre(11, 'Science Fiction')} >Science Fiction</a>
-                    <a onClick={() => addGenre(12, 'Space-Opera')} >Space-Opera</a>
-                    <a onClick={() => addGenre(13, 'Superhero')} >Superhero</a>
+                    <a onClick={() => dispatch({type: 'ADD_GENRE', payload: 1})} >Adventure</a>
+                    <a onClick={() => dispatch({type: 'ADD_GENRE', payload: 2})} >Animated</a>
+                    <a onClick={() => dispatch({type: 'ADD_GENRE', payload: 3})} >Biographical</a>
+                    <a onClick={() => dispatch({type: 'ADD_GENRE', payload: 4})} >Comedy</a>
+                    <a onClick={() => dispatch({type: 'ADD_GENRE', payload: 5})} >Disaster</a>
+                    <a onClick={() => dispatch({type: 'ADD_GENRE', payload: 6})} >Drama</a>
+                    <a onClick={() => dispatch({type: 'ADD_GENRE', payload: 7})} >Epic</a>
+                    <a onClick={() => dispatch({type: 'ADD_GENRE', payload: 8})} >Fantasy</a>
+                    <a onClick={() => dispatch({type: 'ADD_GENRE', payload: 9})} >Musical</a>
+                    <a onClick={() => dispatch({type: 'ADD_GENRE', payload: 10})} >Romantic</a>
+                    <a onClick={() => dispatch({type: 'ADD_GENRE', payload: 11})} >Science Fiction</a>
+                    <a onClick={() => dispatch({type: 'ADD_GENRE', payload: 12})} >Space-Opera</a>
+                    <a onClick={() => dispatch({type: 'ADD_GENRE', payload: 13})} >Superhero</a>
                 </div>
             </div>
         </>

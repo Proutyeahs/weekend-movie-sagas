@@ -2,6 +2,16 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
 
+// start of delete specific genre from database
+router.delete('/:id', (req, res) => {
+  console.log(req.params, req.body)
+})
+
+// start of add new genre for a movie to the database
+router.post('/', (req, res) => {
+  console.log(req.body)
+})
+
 // gets all the genres and movie ids from the DB
 router.get('/', (req, res) => {
   console.log(req.body)

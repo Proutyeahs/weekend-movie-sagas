@@ -21,6 +21,7 @@ function* rootSaga() {
     yield takeEvery('DELETE', deleteMovie)
     yield takeEvery('GET_ALL_GENRES', getAllGenres)
     yield takeEvery('DELETE_GENRE', deleteGenre)
+    yield takeEvery('ADD_GENRE', addGenre)
 }
 
 function* fetchAllMovies() {
@@ -56,10 +57,11 @@ function* deleteMovie(action) {
     }
 }
 
+// start of delete specific Genre
 function* deleteGenre(action) {
     console.log(action.payload)
     try{
-        yield axios.delete(`/api/genre/${action.payload}`)
+        yield axios.delete(`/api/genre/${action.payload.id}`, action.payload.name)
         yield put({type: 'GET_DETAILS'})
     } catch {
         console.log('delete genre error');
@@ -70,10 +72,21 @@ function* deleteGenre(action) {
 function* addMovie(action) {
     console.log(action.payload)
     try{
-        yield axios.post(`/api/movie`, action.payload)
+        yield axios.post('/api/movie', action.payload)
         yield put({type: 'FETCH_MOVIES'})
     } catch {
         console.log('add movie error');
+    }
+}
+
+// Post a new genre to the database
+function* addGenre(action) {
+    console.log(action.payload)
+    try{
+        yield axios.post('/api/genre', action.payload)
+        yield put({type: 'SET_GENRES'})
+    } catch {
+        console.log('add genre error');
     }
 }
 
