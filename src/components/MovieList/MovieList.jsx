@@ -13,6 +13,7 @@ function MovieList() {
         dispatch({ type: 'FETCH_MOVIES' });
     }, []);
 
+    // gets the specific movie details when sent to the details page
     const details = (id) => {
         console.log(id)
         dispatch({

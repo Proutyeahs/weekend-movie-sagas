@@ -5,6 +5,7 @@ import './EditMovie.css'
 
 function EditMovie() {
 
+    // loads the movie details on page refresh
     useEffect(() => {
         reload(id)
     }, [])
@@ -22,11 +23,12 @@ function EditMovie() {
     const history = useHistory();
 
     const details = useSelector(store => store.details);
-    const genres = useSelector(store => store.genres);
+    // const genres = useSelector(store => store.genres);
 
-    const [movieData, setMovieData] = useState({ id: id, title: ''/*, poster: ''*/, description: '', genre_id: '' })
+    const [movieData, setMovieData] = useState({title: ''/*, poster: ''*/, description: '', genre_id: '',  id: id })
     const [genre_id, setGenre_id] = useState('')
 
+    // dispalys the updated values before saving it to the DB
     const editGenre = (id, genre) => {
         setMovieData({ ...movieData, genre_id: id })
         setGenre_id(genre)
@@ -35,14 +37,16 @@ function EditMovie() {
 
     let [hidden, setHidden] = useState(true)
 
+    // sends updated movie values to the put request
     const update = () => {
         dispatch({
             type: 'UPDATE',
             payload: movieData
         })
-        history.push(`/details/${id}`)
+        setTimeout(() => {history.push(`/details/${id}`)}, 2000)
     }
 
+    // sends the id to the delete request
     const remove = () => {
         console.log(id)
         dispatch({
@@ -75,8 +79,8 @@ function EditMovie() {
                         <a onClick={() => editGenre(8, 'Fantasy')} >Fantasy</a>
                         <a onClick={() => editGenre(9, 'Musical')} >Musical</a>
                         <a onClick={() => editGenre(10, 'Romantic')} >Romantic</a>
-                        <a onClick={() => editGenre(11, 'Science')} >Science Fiction</a>
-                        <a onClick={() => editGenre(12, 'Space')} >Space-Opera</a>
+                        <a onClick={() => editGenre(11, 'Science Fiction')} >Science Fiction</a>
+                        <a onClick={() => editGenre(12, 'Space-Opera')} >Space-Opera</a>
                         <a onClick={() => editGenre(13, 'Superhero')} >Superhero</a>
                     </div>
                 </div>

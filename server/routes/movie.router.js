@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
 
+// gets the specific movie
 router.get('/:id', (req, res) => {
   console.log(req.params.id)
   const query = `SELECT * FROM movies WHERE id = $1;`;
@@ -15,6 +16,7 @@ router.get('/:id', (req, res) => {
     })
 });
 
+// gets all the movies
 router.get('/', (req, res) => {
   const query = `SELECT * FROM movies ORDER BY "title" ASC`;
   pool.query(query)
@@ -28,6 +30,7 @@ router.get('/', (req, res) => {
 
 });
 
+// updates a specific movie and genre
 router.put('/:id', (req, res) => {
   console.log("hi", req.body.genre_id)
   const id = req.params.id
@@ -52,6 +55,7 @@ router.put('/:id', (req, res) => {
     })
 })
 
+// deletes a specific move and its genres
 router.delete('/:id', (req, res) => {
   console.log(req.params.id)
   const id = req.params.id
@@ -71,6 +75,7 @@ router.delete('/:id', (req, res) => {
   })
 })
 
+// posts a new movie to the database
 router.post('/', (req, res) => {
   console.log(req.body);
   // RETURNING "id" will give us back the id of the created movie

@@ -5,6 +5,7 @@ import './Details.css'
 
 function Details() {
 
+    // loads the movie details on page refresh
     useEffect(() => {
         reload(id)
     }, [])
@@ -13,7 +14,11 @@ function Details() {
     const reload = (id) => {
         console.log(id)
         dispatch({
-            type: 'GET_DETAILS',
+            type: 'GET_DETAILS', 
+            payload : id
+        })
+        dispatch({
+            type: 'GET_GENRES',
             payload : id
         })
     }
@@ -35,9 +40,9 @@ function Details() {
                     <div className="card-body">{detail.description}</div>
                 </div>
             ))}
+            <h5>Movie Genres:</h5>
             {genres.map(genre => (
                 <div key={genre.name}>
-                    <h5>Movie Genres:</h5>
                     <div className="card-text">{genre.name}</div>
                 </div>
             ))}

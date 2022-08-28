@@ -7,6 +7,7 @@ router.get('/', (req, res) => {
   res.sendStatus(500)
 });
 
+// gets a specific movies genres
 router.get('/:id', (req, res) => {
   console.log(req.params.id)
   const query = `

@@ -10,13 +10,12 @@ import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
-import { yellow } from '@material-ui/core/colors';
 
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
+    yield takeEvery('GET_GENRES', getGenres);
     yield takeEvery('GET_DETAILS', getDetails);
-    yield takeEvery('GET_DETAILS', getGenres);
     yield takeEvery('ADD_MOVIE', addMovie);
     yield takeEvery('UPDATE', updateMovie)
     yield takeEvery('DELETE', deleteMovie)
@@ -33,15 +32,18 @@ function* fetchAllMovies() {
     }
 }
 
+// Updates the values for a movie
 function* updateMovie(action) {
     console.log(action.payload)
     try {
         yield axios.put(`/api/movie/${action.payload.id}`, action.payload)
+        yield put({type: 'SET_DETAILS'}, {type: 'SET_GENRES'})
     } catch {
         console.log('update movie error');
     }
 }
 
+// deletes an entire movie entry
 function* deleteMovie(action) {
     console.log(action.payload)
     try{
@@ -52,6 +54,7 @@ function* deleteMovie(action) {
     }
 }
 
+// adds a new movie to the DB
 function* addMovie(action) {
     console.log(action.payload)
     try{

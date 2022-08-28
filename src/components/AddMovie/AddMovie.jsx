@@ -8,18 +8,21 @@ function AddMovie() {
     const history = useHistory()
     const dispatch = useDispatch()
 
+    // hides the new poster div until values are input
     let [hidden, setHidden] = useState(true)
 
     const [movieData, setMovieData] = useState({ title: '', poster: '', description: '', genre_id: '' })
 
     const [genre_id, setGenre_id] = useState('')
 
+    // displays the new poster before saving it to the database
     const demoPoster = (id, genre) => {
         setMovieData({ ...movieData, genre_id: id })
         setGenre_id(genre)
         setHidden(!hidden)
     }
 
+    // sends the new movie data to the post request
     const handleSubmit = () => {
         console.log(movieData)
         dispatch({
@@ -48,8 +51,8 @@ function AddMovie() {
                     <a onClick={() => demoPoster(8, 'Fantasy')} >Fantasy</a>
                     <a onClick={() => demoPoster(9, 'Musical')} >Musical</a>
                     <a onClick={() => demoPoster(10, 'Romantic')} >Romantic</a>
-                    <a onClick={() => demoPoster(11, 'Science')} >Science Fiction</a>
-                    <a onClick={() => demoPoster(12, 'Space')} >Space-Opera</a>
+                    <a onClick={() => demoPoster(11, 'Science Fiction')} >Science Fiction</a>
+                    <a onClick={() => demoPoster(12, 'Space-Opera')} >Space-Opera</a>
                     <a onClick={() => demoPoster(13, 'Superhero')} >Superhero</a>
                 </div>
             </div>
