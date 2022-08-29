@@ -10,4 +10,4 @@ In this project I created a movie gallery that allows a user to view movie poste
 
 React.js Redux.js ReduxSagas Node.js JSX SQL Express.js Axios HTML CSS PG Bootstrap
 
-To see the fully functional site, please visit: 
+To see the fully functional site, please visit: https://git.heroku.com/protected-river-70159.git
