@@ -46,9 +46,10 @@ function Details() {
                         <div className="card-text">{genre.name}</div>
                     </div>
                 ))}
-                <div>
+                {/* incomplete */}
+                {/* <div>
                     <button className="hover" onClick={() => history.push(`/editgenre/${id}`)}>Add/Remove Genre</button>
-                </div>
+                </div> */}
                 <button className="hover" onClick={() => history.push(`/editmovie/${id}`)}>Edit Movie</button>
                 <button className="hover" onClick={() => history.push('/')}>Back</button>
             </div>

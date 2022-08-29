@@ -1,9 +1,13 @@
 # Project Name
-
-[Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md
+Weekend Movie Sagas
 
 ## Description
+Duration: August 26th - 28th
 
-Your project description goes here. What problem did you solve? How did you solve it?
+In this project I created a movie gallery that allows a user to view movie poster and the details about a specific movie.  The user can also add a new movies and edit or delete existing entrys. 
 
-Additional README details can be found [here](https://github.com/PrimeAcademy/readme-template/blob/master/README.md).
+### Built with
+
+React.js Redux.js ReduxSagas Node.js JSX SQL Express.js Axios HTML CSS PG Bootstrap
+
+To see the fully functional site, please visit: 
