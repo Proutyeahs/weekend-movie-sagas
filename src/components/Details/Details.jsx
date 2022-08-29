@@ -47,9 +47,9 @@ function Details() {
                     </div>
                 ))}
                 {/* incomplete */}
-                <div>
+                {/* <div>
                     <button className="hover" onClick={() => history.push(`/editgenre/${id}`)}>Add/Remove Genre</button>
-                </div>
+                </div> */}
                 <button className="hover" onClick={() => history.push(`/editmovie/${id}`)}>Edit Movie</button>
                 <button className="hover" onClick={() => history.push('/')}>Back</button>
             </div>
